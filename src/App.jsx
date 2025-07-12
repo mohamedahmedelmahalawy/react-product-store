@@ -6,6 +6,7 @@ let router = createBrowserRouter([
   {
     path: "/",
     Component: Layout,
+    errorElement: <Error />,
     // loader: loadRootData,
     children: [
       {
