@@ -10,7 +10,7 @@ function useFetchProducts() {
       .then((res) => {
         setProducts(res.data.products);
         setLoading(false);
-        console.log(res.data.products);
+        // console.log(res.data.products);
       })
       .catch((err) => {
         setError("Error fetching products:", err);

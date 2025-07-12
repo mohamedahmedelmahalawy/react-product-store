@@ -55,16 +55,20 @@ function CartProduct({
       {
         <div className="flex items-center mt-auto">
           <button
-            onClick={(e) =>
-              handleIncrease(e, stock, product, product.count, setCount)
-            }
+            onClick={(e) => {
+              e.stopPropagation();
+              handleIncrease(product);
+            }}
             className="flex-grow-1 bg-[#030712] hover:bg-green-950 mt-auto p-2 rounded-lg font-bold text-yellow-200 text-2xl transition-all duration-150"
           >
             +
           </button>
           <h4 className="px-4 font-bold">{product.count}</h4>
           <button
-            onClick={(e) => handleDecrease(e, product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDecrease(product);
+            }}
             className="flex-grow-1 bg-[#030712] hover:bg-green-950 mt-auto p-2 rounded-lg font-bold text-yellow-200 text-2xl transition-all duration-150"
           >
             -

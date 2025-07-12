@@ -14,8 +14,7 @@ function Product({
   id,
   product,
 }) {
-  const { cart, handleIncrease, handleDecrease } = useCart();
-  const [count, setCount] = useState(0);
+  const { cart, handleIncrease, handleDecrease, itemCount } = useCart();
   const navigate = useNavigate();
   const handleDetails = () => {
     navigate(`/products/${id}`);
@@ -61,11 +60,12 @@ function Product({
 
         <p className="text-sm">{description}</p>
       </div>
-      {count === 0 ? (
+      {itemCount(id) === 0 ? (
         <button
           className="bg-[#030712] hover:bg-green-950 mt-auto p-2 rounded-lg font-bold text-yellow-200 text-2xl transition-all duration-150"
           onClick={(e) => {
-            handleIncrease(e, stock, product, count, setCount);
+            e.stopPropagation();
+            handleIncrease(product);
           }}
         >
           Add to Cart
@@ -73,14 +73,20 @@ function Product({
       ) : (
         <div className="flex items-center mt-auto">
           <button
-            onClick={(e) => handleIncrease(e, stock, product, count, setCount)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleIncrease(product);
+            }}
             className="flex-grow-1 bg-[#030712] hover:bg-green-950 mt-auto p-2 rounded-lg font-bold text-yellow-200 text-2xl transition-all duration-150"
           >
             +
           </button>
-          <h4 className="px-4 font-bold">{count}</h4>
+          <h4 className="px-4 font-bold">{itemCount(id)}</h4>
           <button
-            onClick={(e) => handleDecrease(e, product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDecrease(product);
+            }}
             className="flex-grow-1 bg-[#030712] hover:bg-green-950 mt-auto p-2 rounded-lg font-bold text-yellow-200 text-2xl transition-all duration-150"
           >
             -
