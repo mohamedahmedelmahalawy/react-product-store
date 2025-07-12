@@ -1,12 +1,20 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import { Cart, Layout, ProductDetails, Products } from "./pages/pages";
+import {
+  Cart,
+  Error,
+  Layout,
+  Login,
+  ProductDetails,
+  Products,
+  Register,
+} from "./pages/pages";
 
 let router = createBrowserRouter([
   {
     path: "/",
     Component: Layout,
-    errorElement: <Error />,
+    errorElement: Error,
     // loader: loadRootData,
     children: [
       {
@@ -20,6 +28,14 @@ let router = createBrowserRouter([
       {
         path: "/cart",
         Component: Cart,
+      },
+      {
+        path: "/register",
+        Component: Register,
+      },
+      {
+        path: "/login",
+        Component: Login,
       },
     ],
   },

@@ -1,4 +1,5 @@
-import { useCart } from "../../context/useCart";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../../context/cartcontext/useCart";
 import { range } from "../../funcs/funcs";
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
@@ -11,7 +12,11 @@ function CartProduct({
   rating,
   product,
 }) {
-  const { handleIncrease, handleDecrease, handleDetails } = useCart();
+  const { handleIncrease, handleDecrease } = useCart();
+  const navigate = useNavigate();
+  const handleDetails = () => {
+    navigate(`/products/${product.id}`);
+  };
 
   return (
     <li

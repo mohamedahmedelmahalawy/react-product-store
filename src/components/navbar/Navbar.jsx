@@ -1,11 +1,15 @@
-import React from "react";
 import { LuStore } from "react-icons/lu";
 import { TiShoppingCart } from "react-icons/ti";
+
+import { useCart } from "../../context/cartcontext/useCart";
+import { useUsers } from "../../context/userscontext/useUsers";
 import { NavLink } from "react-router-dom";
-import { useCart } from "../../context/useCart";
 
 function Navbar() {
   const { cartLength } = useCart();
+  const { userAuthenticated, userAuthenticatedValue, handleLogout } =
+    useUsers();
+
   return (
     <nav className="flex justify-between items-center bg-gray-800 p-4 w-full text-white">
       <LuStore />
@@ -14,9 +18,9 @@ function Navbar() {
         <li>
           <NavLink>Home</NavLink>
         </li>
-        <li>
-          <NavLink>Search</NavLink>
-        </li>
+        <li>{/* <NavLink>Search</NavLink> */}</li>
+        <input type="text" className="bg-[#030712ac]" />
+        <NavLink to="/search">search</NavLink>
       </ul>
 
       <div className="flex items-center gap-4">
@@ -26,7 +30,19 @@ function Navbar() {
             {cartLength()}
           </span>
         </NavLink>
-        <div>Login</div>
+        {userAuthenticated && Object.keys(userAuthenticatedValue).length > 0 ? (
+          <div className="flex items-center gap-2">
+            <h3>{userAuthenticatedValue.name}</h3>
+            <NavLink to="/login" onClick={handleLogout}>
+              logout
+            </NavLink>
+          </div>
+        ) : (
+          <div>
+            <NavLink to="/login">Login</NavLink>/
+            <NavLink to="/register">Register</NavLink>
+          </div>
+        )}
       </div>
     </nav>
   );

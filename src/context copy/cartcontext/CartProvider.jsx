@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartContext from "./CartContext";
 
+const initialCartItems = localStorage.getItem("shopping-cart")
+  ? JSON.parse(localStorage.getItem("shopping-cart"))
+  : [];
+
 const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [count, setCount] = useState(0);
+  const [cart, setCart] = useState(initialCartItems);
+
+  useEffect(() => {
+    localStorage.setItem("shopping-cart", JSON.stringify(cart));
+  }, [cart]);
+
   const productExistsInCart = (id) => {
     return cart.some((p) => p.id === id);
   };
@@ -59,6 +67,10 @@ const CartProvider = ({ children }) => {
     removeFromCart(product);
   };
 
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("shopping-cart");
+  };
   return (
     <CartContext.Provider
       value={{
@@ -71,6 +83,7 @@ const CartProvider = ({ children }) => {
         handleIncrease,
         handleDecrease,
         itemCount,
+        // clearCart,
       }}
     >
       {children}

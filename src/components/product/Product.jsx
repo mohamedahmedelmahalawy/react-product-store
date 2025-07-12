@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { range } from "../../funcs/funcs";
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
+
+import { useCart } from "../../context/cartcontext/useCart";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../context/useCart";
 
 function Product({
   thumbnail,
