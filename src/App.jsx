@@ -8,13 +8,14 @@ import {
   ProductDetails,
   Products,
   Register,
+  Search,
 } from "./pages/pages";
 
 let router = createBrowserRouter([
   {
     path: "/",
     Component: Layout,
-    errorElement: Error,
+    errorElement: <Error />,
     // loader: loadRootData,
     children: [
       {
@@ -36,6 +37,10 @@ let router = createBrowserRouter([
       {
         path: "/login",
         Component: Login,
+      },
+      {
+        path: "/search",
+        Component: Search,
       },
     ],
   },
