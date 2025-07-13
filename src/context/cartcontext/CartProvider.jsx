@@ -67,10 +67,6 @@ const CartProvider = ({ children }) => {
     removeFromCart(product);
   };
 
-  // const clearCart = () => {
-  //   setCart([]);
-  //   localStorage.removeItem("shopping-cart");
-  // };
   return (
     <CartContext.Provider
       value={{

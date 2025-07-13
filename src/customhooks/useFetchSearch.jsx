@@ -6,11 +6,12 @@ function useFetchSearch(value) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
   useEffect(() => {
-    AxiosInterceptor.get("products/search?q=" + value)
+    AxiosInterceptor.get("/products/search?q=" + value)
       .then((res) => {
         setProducts(res.data.products);
         setLoading(false);
         // console.log(res.data.products);
+        console.log("Search fetch");
       })
       .catch((err) => {
         setError("Error fetching products:", err);

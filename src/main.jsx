@@ -7,11 +7,9 @@ import UsersProvider from "./context/userscontext/UsersProvider.jsx";
 import { SearchProvider } from "./context/searchontext/SearchProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <SearchProvider>
-    <UsersProvider>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </UsersProvider>
-  </SearchProvider>
+  <UsersProvider>
+    <CartProvider>
+      <App />
+    </CartProvider>
+  </UsersProvider>
 );

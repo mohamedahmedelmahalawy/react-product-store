@@ -19,8 +19,6 @@ function Navbar() {
           <NavLink>Home</NavLink>
         </li>
         <li>{/* <NavLink>Search</NavLink> */}</li>
-        <input type="text" className="bg-[#030712ac]" />
-        <NavLink to="/search">search</NavLink>
       </ul>
 
       <div className="flex items-center gap-4">

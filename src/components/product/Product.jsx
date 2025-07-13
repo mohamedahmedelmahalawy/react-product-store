@@ -15,13 +15,13 @@ function Product({
   id,
   product,
 }) {
-  const { cart, handleIncrease, handleDecrease, itemCount } = useCart();
+  const { handleIncrease, handleDecrease, itemCount } = useCart();
   const navigate = useNavigate();
   const handleDetails = () => {
     navigate(`/products/${id}`);
   };
 
-  console.log(cart);
+  // console.log(cart);
   return (
     <li
       className="flex flex-col gap-4 bg-yellow-200 hover:bg-yellow-100 p-8 rounded-2xl max-w-80 text-[#030712] transition-colors duration-200"

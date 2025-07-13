@@ -5,4 +5,3 @@ export { default as Cart } from "../components/cart/Cart";
 export { default as Error } from "../components/error/Error";
 export { default as Login } from "../components/login/Login";
 export { default as Register } from "../components/register/Register";
-export { default as Search } from "../components/search/Search";

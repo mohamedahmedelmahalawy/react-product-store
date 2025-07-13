@@ -1,11 +1,24 @@
 import Product from "../product/Product";
 import useFetchProducts from "../../customhooks/useFetchProducts";
 import PulseLoader from "react-spinners/PulseLoader";
+import Navbar from "../navbar/Navbar";
+import Searchbar from "../searchbar/Searchbar";
+import useFetchSearch from "../../customhooks/useFetchSearch";
+import { useState } from "react";
 
 function Products() {
   const { products, loading } = useFetchProducts();
+  const [seachValue, setSearchValue] = useState("");
+  const { products: productsFromSearch } = useFetchSearch(seachValue);
+
+  const handleSearch = (val) => {
+    setSearchValue(val);
+  };
+
+  console.log(productsFromSearch);
   return (
     <>
+      <Searchbar handleSearch={handleSearch} />
       <ul
         className={`flex justify-center bg-[#030712]  p-4 ${
           loading
@@ -20,7 +33,13 @@ function Products() {
           </h1>
         )}
         {products &&
+          seachValue === "" &&
           products?.map((p) => {
+            return <Product key={p.id} {...p} product={p} />;
+          })}
+        {productsFromSearch &&
+          seachValue &&
+          productsFromSearch?.map((p) => {
             return <Product key={p.id} {...p} product={p} />;
           })}
       </ul>

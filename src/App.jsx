@@ -8,7 +8,6 @@ import {
   ProductDetails,
   Products,
   Register,
-  Search,
 } from "./pages/pages";
 
 let router = createBrowserRouter([
@@ -37,10 +36,6 @@ let router = createBrowserRouter([
       {
         path: "/login",
         Component: Login,
-      },
-      {
-        path: "/search",
-        Component: Search,
       },
     ],
   },
