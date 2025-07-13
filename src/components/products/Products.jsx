@@ -5,11 +5,14 @@ import Navbar from "../navbar/Navbar";
 import Searchbar from "../searchbar/Searchbar";
 import useFetchSearch from "../../customhooks/useFetchSearch";
 import { useState } from "react";
+import ProtectedRoute from "../protectedroute/ProtectedRoute";
+import { useUsers } from "../../context/userscontext/useUsers";
 
 function Products() {
   const { products, loading } = useFetchProducts();
   const [seachValue, setSearchValue] = useState("");
   const { products: productsFromSearch } = useFetchSearch(seachValue);
+  const { userAuthenticated } = useUsers();
 
   const handleSearch = (val) => {
     setSearchValue(val);
@@ -18,6 +21,7 @@ function Products() {
   console.log(productsFromSearch);
   return (
     <>
+      (
       <Searchbar handleSearch={handleSearch} />
       <ul
         className={`flex justify-center bg-[#030712]  p-4 ${

@@ -9,25 +9,37 @@ import {
   Products,
   Register,
 } from "./pages/pages";
+import ProtectedRoute from "./components/protectedroute/ProtectedRoute";
 
 let router = createBrowserRouter([
   {
     path: "/",
     Component: Layout,
     errorElement: <Error />,
-    // loader: loadRootData,
     children: [
       {
         index: true,
-        Component: Products,
+        element: (
+          <ProtectedRoute>
+            <Products />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/products/:id",
-        Component: ProductDetails,
+        element: (
+          <ProtectedRoute>
+            <ProductDetails />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/cart",
-        Component: Cart,
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/register",
