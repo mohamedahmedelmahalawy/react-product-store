@@ -23,7 +23,7 @@ const UsersProvider = ({ children }) => {
     console.log("Logging out...");
     setUserAuthenticated(false);
     setUserAuthenticatedValue({});
-
+    localStorage.removeItem("shopping-cart");
     localStorage.removeItem("user");
     localStorage.removeItem("isAuthenticated");
   };

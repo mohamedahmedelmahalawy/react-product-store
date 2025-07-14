@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CartContext from "./CartContext";
+import { useUsers } from "../userscontext/useUsers";
 
 const initialCartItems = localStorage.getItem("shopping-cart")
   ? JSON.parse(localStorage.getItem("shopping-cart"))
@@ -7,6 +8,7 @@ const initialCartItems = localStorage.getItem("shopping-cart")
 
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(initialCartItems);
+  const { userAuthenticated, userAuthenticatedValue } = useUsers();
 
   useEffect(() => {
     localStorage.setItem("shopping-cart", JSON.stringify(cart));
@@ -21,6 +23,13 @@ const CartProvider = ({ children }) => {
   };
 
   const addToCart = (productToAdd) => {
+    if (
+      !userAuthenticated ||
+      userAuthenticated === null ||
+      Object.keys(userAuthenticatedValue).length === 0
+    ) {
+      return;
+    }
     const existingProductIndex = cart.findIndex(
       (p) => p.id === productToAdd.id
     );
@@ -39,6 +48,14 @@ const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (productToRemove) => {
+    if (
+      !userAuthenticated ||
+      userAuthenticated === null ||
+      Object.keys(userAuthenticatedValue).length === 0
+    ) {
+      return;
+    }
+
     const existingProductIndex = cart.findIndex(
       (p) => p.id === productToRemove.id
     );
