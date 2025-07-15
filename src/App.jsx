@@ -8,14 +8,17 @@ import {
   ProductDetails,
   Products,
   Register,
+  Wishlist,
 } from "./pages/pages";
 import ProtectedRoute from "./components/protectedroute/ProtectedRoute";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 let router = createBrowserRouter([
   {
     path: "/",
     Component: Layout,
-    errorElement: <Error />,
+    // errorElement: <Error />,
     children: [
       {
         index: true,
@@ -49,12 +52,24 @@ let router = createBrowserRouter([
         path: "/login",
         Component: Login,
       },
+      {
+        path: "/wishlist",
+        Component: Wishlist,
+      },
+      {
+        path: "/*",
+        Component: Error,
+      },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;

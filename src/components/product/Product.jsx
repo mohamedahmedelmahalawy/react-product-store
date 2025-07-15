@@ -2,10 +2,13 @@ import { Fragment } from "react";
 import { range } from "../../funcs/funcs";
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
-
+import { CiHeart } from "react-icons/ci";
 import { useCart } from "../../context/cartcontext/useCart";
 import { useNavigate } from "react-router-dom";
-
+import { FaHeart } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist, removeFromWishlist } from "../../store/wishlistSlice";
+import { useUsers } from "../../context/userscontext/useUsers";
 function Product({
   thumbnail,
   title,
@@ -16,15 +19,35 @@ function Product({
   product,
 }) {
   const { handleIncrease, handleDecrease, itemCount } = useCart();
+
+  const { userAuthenticated, userAuthenticatedValue } = useUsers();
+
+  const dispatch = useDispatch();
+  const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
   const navigate = useNavigate();
   const handleDetails = () => {
     navigate(`/products/${id}`);
   };
 
-  // console.log(cart);
+  const isInWishlist = wishlistItems.some((item) => item.id === id);
+
+  const handleWishItem = (e) => {
+    e.stopPropagation();
+
+    if (!userAuthenticated || !userAuthenticatedValue) {
+      console.log("User not authenticated");
+      return;
+    }
+
+    if (isInWishlist) {
+      dispatch(removeFromWishlist({ id }));
+    } else {
+      dispatch(addToWishlist(product));
+    }
+  };
   return (
     <li
-      className="flex flex-col gap-4 bg-yellow-200 hover:bg-yellow-100 p-8 rounded-2xl max-w-80 text-[#030712] transition-colors duration-200"
+      className="relative flex flex-col gap-4 bg-yellow-200 hover:bg-yellow-100 p-8 rounded-2xl max-w-80 text-[#030712] transition-colors duration-200"
       onClick={handleDetails}
     >
       <div className="flex flex-col gap-4">
@@ -94,6 +117,14 @@ function Product({
           </button>
         </div>
       )}
+
+      <span className="top-5 right-5 absolute" onClick={handleWishItem}>
+        {isInWishlist ? (
+          <FaHeart className="text-red-500 text-4xl" />
+        ) : (
+          <CiHeart className="text-4xl" />
+        )}
+      </span>
     </li>
   );
 }
