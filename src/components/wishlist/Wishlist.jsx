@@ -29,7 +29,7 @@ function Wishlist() {
         {wishlistItems.map((item) => (
           <div
             key={item.id}
-            className="flex items-center gap-8 bg-white shadow-sm hover:shadow-md p-4 border rounded-lg transition-shadow"
+            className="flex justify-between items-center gap-8 bg-white shadow-sm hover:shadow-md p-4 pr-8 border rounded-lg transition-shadow"
           >
             <figure>
               <img
@@ -39,11 +39,13 @@ function Wishlist() {
               />
             </figure>
             <div className="flex flex-col">
-              <div className="flex gap-4">
-                <h3 className="mb-2 font-bold text-lg">{item.title}</h3>
-                <span className="font-bold text-lg">${item.price}</span>
+              <div className="flex items-center gap-4">
+                <h3 className="mb-2 font-bold text-4xl">{item.title}</h3>
+                <span className="font-bold text-red-500 text-xl">
+                  ${item.price}
+                </span>
               </div>
-              <p className="mb-4 text-gray-600 text-sm line-clamp-2">
+              <p className="mb-4 text-gray-600 text-lg line-clamp-2">
                 {item.description}
               </p>
             </div>
